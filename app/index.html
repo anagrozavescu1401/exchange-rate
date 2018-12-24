@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+
+  <div class="content">
+    <div class="title">
+      <h1>Currency Converter</h1>
+      <h1 id="selected-conversion"></h1>
+    </div>
+
+    <div class="convertion-options">
+      <div class="option">
+        <label>Amount</label>
+        <input type="text" id="amount" onkeyup="onAmountChange(event)" />
+      </div>
+
+      <div class="option">
+        <label>From</label>
+        <select id="from-currency" class="dropdown" onchange="onBaseCurrencyChange(event)"></select>
+      </div>
+
+      <div class="option">
+        <label>To</label>
+        <select id="to-currency" class="dropdown" onchange="onCurrencyChange(event)"></select>
+      </div>
+    </div>
+
+
+    <div class="info">
+      <h4 id="from-amount"></h4>
+      <h1 id="conversion"></h1>
+
+      <h4 id="reverse-converion-rate"></h4>
+      <h4 id="base-converion-rate"></h4>
+    </div>
+
+    <h5 id="time"></h5>
+  </div>
+
+
+  <script type="module" src="./js/index.js"></script>
+</body>
+
+</html>
