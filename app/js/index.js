@@ -2,7 +2,7 @@ import * as httpService from './services/http.service.js';
 import * as utilsService from './services/utils.service.js';
 
 /** Used to validate the amount input. */
-const regEx = /^[0-9]+$/;
+const regEx = /^([0-9]+(\.[0-9]+)?)$/;
 const availableCurrencies = ['EUR', 'USD', 'GBP'];
 const defaultAmount = 100;
 let amount = defaultAmount;
@@ -27,6 +27,8 @@ function getRates(selectedBase) {
     /** Add the time the response has been received. */
     utilsService.addTextToElement('time', utilsService.getUTCDate());
     if (resp) {
+      /** Clear error. */
+      utilsService.addTextToElement('error', '');
       rates = resp.rates;
       /** Clear the dropdown options. */
       utilsService.addDropdownOptions('to-currency', null);
@@ -66,8 +68,9 @@ function getRates(selectedBase) {
 function getReverseConversionRate(selectedCurrency) {
   httpService.getRates(selectedCurrency, availableCurrencies, (resp) => {
     if (resp) {
-      utilsService.addTextToElement('reverse-converion-rate',
-        `1${selectedCurrency}=${resp.rates[selectedBase]}${selectedBase}`);
+      /** Clear error. */
+      utilsService.addTextToElement('error', '');
+      utilsService.addTextToElement('reverse-converion-rate', `1${selectedCurrency}=${resp.rates[selectedBase]}${selectedBase}`);
     }
     else {
       utilsService.addTextToElement('error', 'The server is not working. Please, try later.');
