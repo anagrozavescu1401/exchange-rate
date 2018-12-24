@@ -80,8 +80,14 @@ function getReverseConversionRate(selectedCurrency) {
 
 function computeAmount(selectedCurrency, amountToConvert) {
   const result = amountToConvert * rates[selectedCurrency];
-  utilsService.addTextToElement('from-amount', `${amount} ${selectedBase} =`);
-  utilsService.addTextToElement('conversion', `${Number(result).toLocaleString('en-US', { minimumFractionDigits: 4 })} ${selectedCurrency}`);
+  if (!isNaN(result)) {
+    utilsService.addTextToElement('error', '');
+    utilsService.addTextToElement('from-amount', `${amount} ${selectedBase} =`);
+    utilsService.addTextToElement('conversion', `${Number(result).toLocaleString('en-US', { minimumFractionDigits: 4 })} ${selectedCurrency}`);
+  }
+  else {
+    utilsService.addTextToElement('error', 'Only numbers are allowed.');
+  }
 }
 
 /** Conver amount when the user is typing. Only numbers are taken into consideration. */
